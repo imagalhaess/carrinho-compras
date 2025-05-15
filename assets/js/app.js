@@ -14,7 +14,9 @@ function adicionar() {
   const listaProdutos = document.getElementById("lista-produtos");
   const itemCarrinho = document.createElement("section");
   itemCarrinho.classList.add("carrinho__produtos__produto");
-  itemCarrinho.innerText = `${quantidade}x ${nomeProduto} - R$ ${valorUnitario.toFixed(2)}`;
+  itemCarrinho.innerText = `${quantidade}x ${nomeProduto} - R$ ${valorUnitario.toFixed(
+    2
+  )}`;
 
   listaProdutos.appendChild(itemCarrinho);
 }
