@@ -1,33 +1,28 @@
-let total = 0;
+let total;
+limpar ();
+
 function adicionar() {
-  const selectProduto = document.getElementById("produto");
-  const produtoSelecionado = selectProduto.value;
-
-  const partes = produtoSelecionado.split(" - ");
-  const nomeProduto = partes[0]; // Nome do produto, primeira parte do array
-  const valorUnitario = parseFloat(
-    partes[1].replace("R$", "").replace(",", ".")
-  ); // Remove 'R$ ' e substitui ',' por '.'
-  const selectQuantidade = document.getElementById("quantidade");
-  const quantidade = parseInt(selectQuantidade.value);
-  const subtotal = valorUnitario * quantidade;
-
-  const listaProdutos = document.getElementById("lista-produtos");
-  const itemCarrinho = document.createElement("section");
-  itemCarrinho.classList.add("carrinho__produtos__produto");
-  itemCarrinho.innerText = `${quantidade}x ${nomeProduto} - R$ ${valorUnitario.toFixed(
-    2
-  )}`;
-  listaProdutos.appendChild(itemCarrinho);
-
+  // Recupera o valores nome do produto, valor e a quantidade
+  let produto = document.getElementById("produto").value;
+  let nomeProduto = produto.split(" - ")[0];
+  let valorUnitario = produto.split("R$")[1];
+  let quantidade = document.getElementById("quantidade").value;
+  // Calcular o subtotal
+  let subtotal = valorUnitario * quantidade;
+  let carrinho = document.getElementById("lista-produtos");
+  // Adiciona o produto ao carrinho
+  carrinho.innerHTML = carrinho.innerHTML + `<section class="carrinho__produtos__produto">
+          <span class="texto-azul">${quantidade}</span>x ${nomeProduto}  <span class="texto-azul"> R$${subtotal}</span>
+        </section>`
+  // Atualiza o valor total
   total += subtotal;
-  const totalElement = document.getElementById("valor-total");
+  // Atualiza o valor total na tela
+  let totalElement = document.getElementById("valor-total");
   totalElement.innerText = `R$ ${total.toFixed(2)}`;
-
-  
+  document.getElementById("quantidade").value = 0; // Limpa o campo de quantidade
 }
 function limpar() {
-  document.getElementById("lista-produtos").innerHTML = ""; // Limpa a lista de produtos
-  total = 0; // Reseta o total
-  const totalElement = document.getElementById("valor-total").innerText = `R$ ${total.toFixed(2)}`; // Mostra o valor total resetado na tela
+total = 0;
+document.getElementById("lista-produtos").innerHTML = ""; // Limpa a lista de produtos
+document.getElementById("valor-total").innerText = `R$ ${total.toFixed(2)}`; // Mostra o valor total zerado
 }
